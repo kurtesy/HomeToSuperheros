@@ -30,7 +30,7 @@ class SuperHero extends Component {
       this.setState({isLoading: true});
       getCharacters(this.state.searchText).then(res => {
         console.log('initialize', JSON.stringify(res));
-        this.setState({data: res, isLoading: true});
+        this.setState({data: res, isLoading: false});
       });
     }
   };
