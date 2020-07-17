@@ -16,8 +16,12 @@ export const getCharacters = async name => {
   var result = [];
   try {
     const response = await APILayer.get(URL + `/search/${name}`);
-    console.log('Get Superhero character list', response.data.results[0]);
-    result = response.data.results;
+    if ('error' in response.data) {
+      result = [];
+    } else {
+      console.log('Get Superhero character list', response.data.results[0]);
+      result = response.data.results;
+    }
   } catch (err) {
     console.log('ERRRR', err);
     result = err;

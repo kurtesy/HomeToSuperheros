@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Button} from 'react-native-material-ui';
 import {Header, SearchBar, ListItem, Overlay} from 'react-native-elements';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import APILayer, {getCharacters} from './services/APILayer';
 
@@ -17,13 +18,12 @@ class SuperHero extends Component {
     isLoading: false,
     data: [],
     searchText: 'batman',
+    searched: false,
   };
 
   componentDidMount() {
     this.initialize();
   }
-
-  componentWillMount() {}
 
   initialize = async () => {
     if (this.state.searchText !== '') {
@@ -41,6 +41,7 @@ class SuperHero extends Component {
 
   searchHim = () => {
     this.initialize();
+    this.setState({searched: true});
   };
 
   render() {
@@ -64,37 +65,55 @@ class SuperHero extends Component {
           <Overlay
             isVisible={isLoading}
             windowBackgroundColor="rgba(255, 255, 255, .5)"
-            overlayBackgroundColor="red"
+            overlayBackgroundColor="rgba(0, 0, 0, .5)"
             width="auto"
-            height="auto">
-            {/* <Text>Gaining Energy...</Text> */}
+            height="auto"
+            style={styles.overlay}>
             <Image
               source={require('./assets/bolt.gif')}
               style={styles.loaderImage}
               resizeMode={'center'}
             />
           </Overlay>
-          {data.map((item, index) => (
-            <ListItem
-              key={index}
-              leftAvatar={{source: {uri: item.image.url}, size: 200}}
-              title={item.name}
-              subtitle={item.biography.publisher}
-              bottomDivider>
-              <Image
-                source={{uri: item.image.url}}
-                style={{width: 200, height: 200}}
-              />
-            </ListItem>
-          ))}
+          {data.length > 0
+            ? data.map((item, index) => (
+                <ListItem
+                  key={index}
+                  leftAvatar={{source: {uri: item.image.url}, size: 200}}
+                  title={item.name}
+                  subtitle={item.biography.publisher}
+                  bottomDivider>
+                  <Image
+                    source={{uri: item.image.url}}
+                    style={{width: 200, height: 200}}
+                  />
+                </ListItem>
+              ))
+            : this.state.searched && (
+                <View style={styles.noData}>
+                  <Image
+                    source={require('./assets/rocket_wink.gif')}
+                    style={styles.noDataImg}
+                  />
+                  <Text style={styles.noDataTxt}>Nothing Found!</Text>
+                </View>
+              )}
         </ScrollView>
-        <Button raised primary text="Woosh!!" onPress={this.searchHim} />
+        <View style={{width: 100, alignSelf: 'center'}}>
+          <Button
+            raised
+            primary
+            text="Woosh!!"
+            onPress={this.searchHim}
+            icon={<FontAwesomeIcon name="superpowers" size={16} color="red" />}
+          />
+        </View>
       </View>
     );
   }
 }
 
-// Define some colors and default sane values
+// Define some colors and default values
 const styles_util = {
   colors: {primaryColor: '#af0e66'},
   dimensions: {defaultPadding: 12},
@@ -107,12 +126,38 @@ const styles = StyleSheet.create({
     height: '75%',
   },
   loaderImage: {
-    opacity: 0.3,
+    opacity: 0.5,
     position: 'absolute',
-    right: '-50%',
-    bottom: '50%',
+    left: -290,
+    top: -290,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  loaderText: {
+    opacity: 1,
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noData: {
+    top: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noDataImg: {
+    width: 200,
+    height: 200,
+  },
+  noDataTxt: {
+    fontSize: 50,
+    fontFamily: 'Cochin',
   },
 });
 

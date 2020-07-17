@@ -13,6 +13,7 @@ import {
   View,
   Text,
   Headers,
+  Platform,
 } from 'react-native';
 import {COLOR, ThemeContext, getTheme} from 'react-native-material-ui';
 
@@ -22,7 +23,7 @@ const superTheme = {
   },
 };
 
-import SuperHeroView from './SuperHeroView';
+import SuperHeroView from './SuperHeroMain';
 
 const App = () => {
   return (
@@ -40,6 +41,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f6f6f6',
+    paddingTop: Platform.OS === 'ios' ? 0 : 0,
+    top: 0,
   },
 });
 

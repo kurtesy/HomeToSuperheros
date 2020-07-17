@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "pod": "cd ios && pod install",
     "clean": "react-native-clean-project",
-    "link": "react-native link"
+    "link": "react-native link",
+    "debugme": "react-devtools"
   },
   "dependencies": {
     "axios": "^0.19.2",
