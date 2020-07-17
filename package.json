@@ -11,7 +11,8 @@
     "pod": "cd ios && pod install",
     "clean": "react-native-clean-project",
     "link": "react-native link",
-    "debugme": "react-devtools"
+    "debugme": "react-devtools",
+    "android-bundle": "react-native bundle --platform android --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --dev false --reset-cache --assets-dest android/app/src/main/res/"
   },
   "dependencies": {
     "axios": "^0.19.2",
