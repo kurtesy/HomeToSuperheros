@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Image,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import {Button} from 'react-native-material-ui';
 import {Header, SearchBar, ListItem, Overlay} from 'react-native-elements';
@@ -82,6 +83,12 @@ class SuperHero extends Component {
                   leftAvatar={{source: {uri: item.image.url}, size: 200}}
                   title={item.name}
                   subtitle={item.biography.publisher}
+                  titleStyle={{
+                    color: styles_util.colors.primary,
+                    fontWeight: 'bold',
+                  }}
+                  subtitleStyle={{color: styles_util.colors.secondary}}
+                  style={{backgroundColor: styles_util.colors.light}}
                   bottomDivider>
                   <Image
                     source={{uri: item.image.url}}
@@ -99,13 +106,17 @@ class SuperHero extends Component {
                 </View>
               )}
         </ScrollView>
-        <View style={{width: 100, alignSelf: 'center'}}>
+        <View style={styles.button}>
           <Button
             raised
             primary
             text="Woosh!!"
             onPress={this.searchHim}
-            icon={<FontAwesomeIcon name="superpowers" size={16} color="red" />}
+            icon={<FontAwesomeIcon name="superpowers" size={20} color="red" />}
+            style={{
+              text: {fontWeight: 'bold', fontSize: 20, padding: 5},
+              container: {borderRadius: 10},
+            }}
           />
         </View>
       </View>
@@ -115,7 +126,12 @@ class SuperHero extends Component {
 
 // Define some colors and default values
 const styles_util = {
-  colors: {primaryColor: '#af0e66'},
+  colors: {
+    primary: '#3b2e5a',
+    secondary: '#394989',
+    light: '#fff48f',
+    other: '#4ea0ae',
+  },
   dimensions: {defaultPadding: 12},
   fonts: {largeFontSize: 18, mediumFontSize: 16, smallFontSize: 12},
 };
@@ -123,7 +139,7 @@ const styles_util = {
 // Define styles here
 const styles = StyleSheet.create({
   listStyle: {
-    height: '75%',
+    height: '78%',
   },
   loaderImage: {
     opacity: 0.5,
@@ -147,17 +163,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   noData: {
-    top: 100,
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   noDataImg: {
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
+    top: 30,
   },
   noDataTxt: {
+    paddingTop: 30,
     fontSize: 50,
-    fontFamily: 'Cochin',
+    fontFamily: Platform.OS === 'ios' ? 'Cochin' : 'Roboto',
+  },
+  button: {
+    width: 150,
+    alignSelf: 'flex-end',
+    height: 20,
+    padding: 10,
   },
 });
 

@@ -39,8 +39,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#303337',
     paddingTop: Platform.OS === 'ios' ? 0 : 0,
     top: 0,
   },
