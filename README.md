@@ -1,6 +1,8 @@
 # HomeToSuperheros
 React Native app to fetch you all the superhero data...just a search away
 
+![](https://imgur.com/a/Alnc7gC)
+
 ## Setup:
 1. Clone this repo in your local using `git clone https://github.com/kurtesy/HomeToSuperheros.git`
 2. Next, go to the folder "HomeToSuperheros" -> `cd HomeToSuperheros`
