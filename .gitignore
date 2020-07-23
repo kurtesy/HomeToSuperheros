@@ -1,4 +1,6 @@
 .DS_Store
+android/app/debug.keystore
+android/app/_BUCK
 
 build/
 *.pbxuser
@@ -51,3 +53,4 @@ buck-out/
 /ios/Podfile.lock
 
 package-lock.json
+yarn.lock

@@ -7,12 +7,16 @@ import {
   Image,
   StyleSheet,
   Platform,
-} from 'react-native';
+  Dimensions,
+} from 'react-native'
 import {Button} from 'react-native-material-ui';
 import {Header, SearchBar, ListItem, Overlay} from 'react-native-elements';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import APILayer, {getCharacters} from './services/APILayer';
+import SuperHeroDetails from './SuperHeroDetails';
+
+const screen = Dimensions.get('screen');
 
 class SuperHero extends Component {
   state = {
@@ -20,6 +24,10 @@ class SuperHero extends Component {
     data: [],
     searchText: 'batman',
     searched: false,
+    dimensions: {
+      height: screen.height || 200,
+      width: screen.width,
+    },
   };
 
   componentDidMount() {
@@ -58,10 +66,11 @@ class SuperHero extends Component {
           rightComponent={{icon: 'home', color: '#fff'}}
         />
         <SearchBar
-          placeholder="Type Here..."
+          placeholder="Enter your superhero name..."
           onChangeText={this.updateSearch}
           value={searchText}
         />
+        <SuperHeroDetails name={'kurtesy'} />
         <ScrollView style={styles.listStyle}>
           <Overlay
             isVisible={isLoading}
@@ -89,12 +98,8 @@ class SuperHero extends Component {
                   }}
                   subtitleStyle={{color: styles_util.colors.secondary}}
                   style={{backgroundColor: styles_util.colors.light}}
-                  bottomDivider>
-                  <Image
-                    source={{uri: item.image.url}}
-                    style={{width: 200, height: 200}}
-                  />
-                </ListItem>
+                  bottomDivider
+                />
               ))
             : this.state.searched && (
                 <View style={styles.noData}>
@@ -139,7 +144,7 @@ const styles_util = {
 // Define styles here
 const styles = StyleSheet.create({
   listStyle: {
-    height: '78%',
+    height: '80%',
   },
   loaderImage: {
     opacity: 0.5,
@@ -179,9 +184,11 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 150,
+    position: 'absolute',
     alignSelf: 'flex-end',
     height: 20,
     padding: 10,
+    top: 150,
   },
 });
 
