@@ -15,7 +15,7 @@
     "android-bundle": "react-native bundle --platform android --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --dev false --reset-cache --assets-dest android/app/src/main/res/"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.30.2",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-axios": "^0.17.1",
